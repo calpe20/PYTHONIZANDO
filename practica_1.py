@@ -9,4 +9,4 @@ print x
 if x == y:
     print str(y) + ' es igual al numero generado'
 else:
-	print 'Fallando'
+    print 'Fallando'
