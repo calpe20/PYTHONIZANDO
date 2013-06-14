@@ -1,0 +1,2427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="generator" CONTENT="http://txt2tags.org">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<LINK REL="stylesheet" TYPE="text/css" HREF="css/base.css">
+<TITLE>﻿Interfaz gráfica con Tkinter</TITLE>
+</HEAD>
+<BODY>
+
+<DIV CLASS="header" ID="header">
+<H1>﻿Interfaz gráfica con Tkinter</H1>
+<H2>Codigo Python [contacto@codigopython.com.ar]</H2>
+<H3>Ultima modificación 26-07-2012</H3>
+</DIV>
+
+<DIV CLASS="body" ID="body">
+<P>
+Licencia:
+</P>
+<P>
+<A HREF="http://creativecommons.org/licenses/by-sa/3.0/deed.es"><IMG ALIGN="middle" SRC="img/cc-by-sa.png" BORDER="0" ALT=""></A>
+</P>
+<P>
+Este trabajo esta licenciado bajo la licencia de Creative Commons Atribución-CompartirIgual 3.0 Unported. Para ver una copia de esta licencia, visita <A HREF="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</A> o envía una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+</P>
+<P>
+Puede descargar la versión más reciente de esta guía gratuitamente en la web
+<A HREF="https://github.com/eliluminado/Guia-Tkinter">https://github.com/eliluminado/Guia-Tkinter</A>
+</P>
+<P>
+ <IMG ALIGN="right" SRC="img/Logo_Free_Cultural_Works.png" BORDER="0" ALT="">
+</P>
+<P>
+Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGTK, PyQT, WxPython o Tkinter entre las mas conocidas teniendo cada una sus ventajas y desventajas, así como cada una tiene facilidades y complicaciones en su uso y aplicación. En esta oportunidad les daremos un espacio a Tkinter e intentaremos ser lo mas lo mas claro posible sin pasarnos por alto los pequeños detalles en lo que compone la creación de una interfaz gráfica en Python con el toolkit Tkinter.
+</P>
+
+<A NAME="toc1"></A>
+<H1>1. Índice</H1>
+
+<DIV CLASS="toc">
+
+  <OL>
+  <LI><A HREF="#toc1">Índice</A>
+  <LI><A HREF="#toc2">Introducción</A>
+    <UL>
+    <LI><A HREF="#toc3">2.1. Acerca de Tk</A>
+      <UL>
+      <LI><A HREF="#toc4">2.1.1. Historia</A>
+      <LI><A HREF="#toc5">2.1.2. Virtudes y limitaciones</A>
+      </UL>
+    <LI><A HREF="#toc6">2.2. Que es una interfaz grafica</A>
+    <LI><A HREF="#toc7">2.3. Instalando Tkinter</A>
+      <UL>
+      <LI><A HREF="#toc8">2.3.1. Linux</A>
+      <LI><A HREF="#toc9">2.3.2. Windows</A>
+      <LI><A HREF="#toc10">2.3.3. Mac</A>
+      </UL>
+    <LI><A HREF="#toc11">2.4. Sobre esta guía</A>
+    </UL>
+  <LI><A HREF="#toc12">Empezando por lo básico</A>
+  <LI><A HREF="#toc13">Widgets</A>
+    <UL>
+    <LI><A HREF="#toc14">4.1. Etiquetas [Label]</A>
+    <LI><A HREF="#toc15">4.2. Botones [Button]</A>
+    <LI><A HREF="#toc16">4.3. Cuadro de texto [Entry]</A>
+      <UL>
+      <LI><A HREF="#toc17">4.3.1. Índices</A>
+      <LI><A HREF="#toc18">4.3.2. Métodos</A>
+      <LI><A HREF="#toc19">4.3.3. Validando un campo de texto</A>
+      </UL>
+    <LI><A HREF="#toc20">4.4. Opciones</A>
+      <UL>
+      <LI><A HREF="#toc21">4.4.1. Disponibles para</A>
+      </UL>
+    <LI><A HREF="#toc22">4.5. Variables</A>
+    </UL>
+  <LI><A HREF="#gestion">Gestión del diseño</A>
+    <UL>
+    <LI><A HREF="#toc24">5.1. Métodos</A>
+      <UL>
+      <LI><A HREF="#toc25">5.1.1. iconify</A>
+      <LI><A HREF="#toc26">5.1.2. deiconify</A>
+      <LI><A HREF="#toc27">5.1.3. title</A>
+      <LI><A HREF="#toc28">5.1.4. geometry</A>
+      <LI><A HREF="#toc29">5.1.5. maxsize</A>
+      <LI><A HREF="#toc30">5.1.6. minsize</A>
+      <LI><A HREF="#toc31">5.1.7. state</A>
+      <LI><A HREF="#toc32">5.1.8. resizable</A>
+      <LI><A HREF="#toc33">5.1.9. withdraw</A>
+      <LI><A HREF="#toc34">5.1.10. transient</A>
+      </UL>
+    <LI><A HREF="#toc35">5.2. Gestión de la geometría</A>
+      <UL>
+      <LI><A HREF="#toc36">5.2.1. pack</A>
+      <LI><A HREF="#toc37">5.2.2. grid</A>
+      <LI><A HREF="#toc38">5.2.3. place</A>
+      </UL>
+    <LI><A HREF="#toc39">5.3. Frame</A>
+    <LI><A HREF="#colores">5.4. Colores</A>
+      <UL>
+      <LI><A HREF="#toc41">5.4.1. Nombres de colores</A>
+      <LI><A HREF="#toc42">5.4.2. RGB hexadecimal</A>
+      <LI><A HREF="#toc43">5.4.3. Consejos</A>
+      </UL>
+    <LI><A HREF="#toc44">5.5. Fuentes</A>
+    <LI><A HREF="#toc45">5.6. Unidades de medida</A>
+    <LI><A HREF="#toc46">5.7. Imágenes</A>
+      <UL>
+      <LI><A HREF="#toc47">5.7.1. PhotoImage</A>
+      <LI><A HREF="#toc48">5.7.2. PIL</A>
+      </UL>
+    </UL>
+  <LI><A HREF="#toc49">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc50">Ventanas de diálogos</A>
+  <LI><A HREF="#toc51">Eventos</A>
+  <LI><A HREF="#toc52">Ejemplos Avanzados</A>
+  <LI><A HREF="#toc53">Notas finales</A>
+  <LI><A HREF="#toc54">Enlaces de interés</A>
+  <LI><A HREF="#glosario">Glosario</A>
+  <LI><A HREF="#toc56">Anexos</A>
+    <UL>
+    <LI><A HREF="#toc57">13.1. Colores</A>
+    </UL>
+  <LI><A HREF="#toc58">Licencia</A>
+  </OL>
+
+</DIV>
+<A NAME="toc2"></A>
+<H1>2. Introducción</H1>
+
+<P>
+Sean bienvenidos a esta noble guia que pretende a lo largo de sus capitulos mostrar las herramientas y conocimientos necesarios para el desarrollo de interfaces graficas con las librerias Tk y el lenguaje de programacion Python. El contenido de esta guia no pretende ser una referencia completa de lo que puede lograr pero si servir como una base al poco contenido que se logra en español sobre Tkinter.
+</P>
+
+<A NAME="toc3"></A>
+<H2>2.1. Acerca de Tk</H2>
+
+<P>
+Tkinter es un <A HREF="http://es.wikipedia.org/wiki/Binding">binding</A> de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programación entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptación de esta librería para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondrá un inconveniente.
+</P>
+<P>
+Se considera un estándar para la interfaz gráfica de usuario (GUI) para Python y es el que viene por defecto con la instalación para Microsoft Windows y preinstalado en la mayoría de las distribuciones de GNU/Linux. Con Tkinter podremos conseguir resultados casi tan buenos como con otras librerías gráficas siempre teniendo en cuenta que quizás con otras herramientas podamos realizar trabajos mas complejos donde necesitemos una plataforma mas robusta, pero como herramienta didáctica e interfaces sencillas nos sobrara, dándonos una perspectiva de lo que se trata el desarrollo de una parte muy importante de una aplicación si deseamos distribuirla. Gracias a Tkinter veremos como interactuar con el usuario pidiéndole el ingreso de datos, capturando la pulsación de teclas, movimientos del mouse, entre algunas de las cosas que podremos lograr.
+</P>
+
+<A NAME="toc4"></A>
+<H3>2.1.1. Historia</H3>
+
+<A NAME="toc5"></A>
+<H3>2.1.2. Virtudes y limitaciones</H3>
+
+<A NAME="toc6"></A>
+<H2>2.2. Que es una interfaz grafica</H2>
+
+<A NAME="toc7"></A>
+<H2>2.3. Instalando Tkinter</H2>
+
+<A NAME="toc8"></A>
+<H3>2.3.1. Linux</H3>
+
+<A NAME="toc9"></A>
+<H3>2.3.2. Windows</H3>
+
+<A NAME="toc10"></A>
+<H3>2.3.3. Mac</H3>
+
+<A NAME="toc11"></A>
+<H2>2.4. Sobre esta guía</H2>
+
+<P>
+Para los que deseen colaborar con esta guía así como en su contenido, pueden hacerlo registrándose en el <A HREF="http://foro.codigopython.com.ar/">Foro</A> o desde su repositorio en GitHub <A HREF="https://github.com/eliluminado/Guia-Tkinter">https://github.com/eliluminado/Guia-Tkinter</A>
+</P>
+
+<A NAME="toc12"></A>
+<H1>3. Empezando por lo básico</H1>
+
+<P>
+Lo primero que debemos hacer al igual que con otros módulos, es que debemos importarlo para poder comenzar a utilizarlo, y al igual que con otros módulos no hay una sola forma de hacerlo.
+</P>
+<P>
+La primer forma (y la mas popular):
+</P>
+
+<PRE>
+from Tkinter import *
+</PRE>
+
+<P>
+Y la segunda:
+</P>
+
+<PRE>
+import Tkinter
+</PRE>
+
+<DL>
+<DT><B>NOTA</B></DT><DD>
+En las versiones 3.x de Python el modulo Tk se debe llamar de esta forma <I>"from Tkinter import *"</I> y no de esta otra forma <I>"from Tkinter import *"</I>, es un cambio menor que hay que tener en cuenta si están trabajando con Python 3.
+</DL>
+
+<P>
+La diferencia entre usar la primera o la segunda forma es la misma con la que nos podemos encontrar a la hora de importar un modulo en Python, para verlo les muestro esta diferencia utilizando al modulo <I>'time'</I> y usamos el siguiente ejemplo:
+</P>
+
+<PRE>
+import time
+time.sleep(10)
+</PRE>
+
+<PRE>
+from time import sleep
+sleep(10)
+</PRE>
+
+<P>
+Usando la forma <I>"import Tkinter"</I> cada vez que utilicemos una función de este modulo tendremos que anteponer la palabra <I>'Tkinter'</I>, en cambio usando la segunda forma <I>"from Tkinter import *"</I> simplemente deberemos usar el nombre de la función sin el nombre del modulo. Hay otras formas pero dependerá de tu forma de trabajar o la que te resulte mas cómoda, en todo caso puedes darle un vistazo a esta traducción de la guía de estilo escrita por Guido van Rossum y Barry Warsaw <A HREF="http://mundogeek.net/traducciones/guia-estilo-python.htm">http://mundogeek.net/traducciones/guia-estilo-python.htm</A>
+</P>
+<P>
+Por ahora a modo didactico usaremos la segunda forma para que los ejemplos sean mas claros, pero esto queda a tu eleccion. Ahora si retomemos nuestro camino.
+</P>
+<P>
+Una observación que tendremos que tener antes de continuar es no debemos pasa por alto la posibilidad de que el usuario no tenga instalado las librerías de Tkinter y en consecuencia nuestra aplicación no podrá funcionar, lo mejor en este caso como en muchos otros es anticiparnos a los posibles errores que puedan ir surgiendo y manejar las excepciones de la siguiente forma:
+</P>
+
+<PRE>
+try:
+    import Tkinter
+except ImportError:
+    raise ImportError,"Se requiere el modulo Tkinter"
+</PRE>
+
+<P>
+De esta forma en caso de que el potencial usuario de nuestra preciada aplicación no puede ejecutarla pueda saber cual es motivo (en este caso es que no tenga instalado Tkinter) por el cual no pudo iniciarla.
+</P>
+<P>
+Una vez importado el modulo Tkinter correctamente podemos utilizarlo para crear nuestra primera ventana de la siguiente forma:
+</P>
+
+<PRE>
+import Tkinter
+
+root = Tkinter.Tk()
+root.mainloop()
+</PRE>
+
+<P>
+Estas lineas son fundamentales, ya que de ellas dependerá gran parte del contenido así como pueden ser botones y menús, aunque mas adelante conforme vayamos viendo temas mas avanzados podremos hacer uso de otras herramientas y técnicas. 
+En la primera linea (No tengamos en cuenta la importación) se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador que en este caso lo llamamos 'root' debemos cerrarlo para capturar como veremos mas adelante los eventos.
+</P>
+
+<DL>
+<DT><B>NOTA</B></DT><DD>
+La variable 'root' usada para nombrar al identificador puede ser reemplazada por cualquier otro nombre siempre y cuando se respeten las palabras reservadas de Python, aunque es muy utilizado usar el nombre 'root' para la ventana principal y puede ser una buena practica para que resulte mas familiar a los demás programadores que se quieran unir al desarrollo de nuestra aplicación.
+</DL>
+
+<P>
+Con esto ya tendremos una ventana vacía que nos servirá para comenzar a trabajar, a partir de ahora iremos ampliando el contenido mostrando los distintos widgets con los que contamos en Tkinter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de este material.
+</P>
+
+<A NAME="toc13"></A>
+<H1>4. Widgets</H1>
+
+<P>
+En esta sección no nos centraremos en el posicionamiento y diseño de los elementos que compondrán nuestra interfaz gráfica, lo dejaremos para la siguiente sección <A HREF="#gestion">"Gestión del diseño"</A> en donde se vera mas detenidamente este asunto.
+</P>
+
+<A NAME="toc14"></A>
+<H2>4.1. Etiquetas [Label]</H2>
+
+<P>
+Para comenzar a llenar esa vacía ventana que acabamos de crear vamos a nombrar a las etiquetas o mas conocidas como <I>'label'</I> por su nombre en ingles, las podemos encontrar desde interfaces gráficas hasta en formularios en HTML y son sumamente útiles en la construcción de interfaces y formularios, al igual que cuando creamos nuestra ventana vacía declarándola de la siguiente forma <I>"root = Tkinter.Tk()"</I> tendremos que hacerlo con nuestra etiqueta, para esto necesitamos escoger un nombre en mi caso escogeré <B>"etiqueta"</B> para declararla y deberemos llamar al widget "Label" en vez de la función "Tk" como habíamos hecho anteriormente, como para orientarnos con lo ya visto quedando por ahora algo así:
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label()
+</PRE>
+
+<P>
+Una vez creada la estructura básica de la etiqueta, tendremos que llenar esa paréntesis. Primero tendremos que indicar a donde pertenece ese 'label' indicando el identificador de la ventana que en nuestro caso es 'root', separado por una coma escribiremos lo siguiente <B>text=</B> en donde seguido del signo igual incluiremos el texto que deseamos que incluya la etiqueta, la cual puede ser un texto (que tendremos que encerrar entre comillas al igual que cuando usamos la sentencia print) o una variable que contenga al texto. Para verlo un poco mas claro juntemos todo en dos ejemplos, uno donde muestre un texto fijo que le indiquemos a la etiqueta y otro usando una variable
+</P>
+
+<UL>
+<LI><B>Ejemplo numero 1</B>:
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Codigo Python")
+</PRE>
+
+<P></P>
+<LI><B>Ejemplo numero 2</B>:
+
+<PRE>
+import getpass
+texto = "Bienvenido %s a Codigo Python" % getpass.getuser()
+etiqueta_2 = Tkinter.Label(root, text=texto)
+</PRE>
+
+</UL>
+
+<P>
+Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que obtengamos al ejecutar <I>'getpass.getuser()'</I> que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo código Python.
+</P>
+<P>
+Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos tres formas (Esto se vera mas detenidamente mas adelante) una es usando <B>'pack'</B> y las otras dos son <B>'grid'</B> y <B>'place'</B>. Como esto se vera mas adelante haré una breve síntesis de las tres opciones que tenemos:
+</P>
+
+<UL>
+<LI>'pack': 
+<P></P>
+<LI>'grid': 
+<P></P>
+<LI>'place: 
+</UL>
+
+<P>
+Como en este ejemplo solo colocaremos una etiqueta no es necesario recurrir al uso de 'grid' para posicionarlo, así que usaremos 'pack' en su lugar. Pero lo mas importante es saber como se declara esta etiqueta en nuestra ventana y poder ver nuestro primer widget en funcionamiento, para lograr esto deberemos usar la siguiente forma:
+</P>
+
+<PRE>
+etiqueta.pack()
+</PRE>
+
+<P>
+Como vemos es muy simple solo debemos usar el nombre que utilizamos para declarar nuestra etiqueta seguida de la forma que vayamos a utilizar para posicionarla, pero para los que no desean esperar a leer la siguiente sección para ver como se utiliza 'grid' les dejo la misma etiqueta pero posicionándola con 'grid' en lugar de usar 'pack' como ya lo habíamos visto:
+</P>
+
+<PRE>
+etiqueta.grid(row=1, column=1)
+</PRE>
+
+<P>
+Como se puede observar esta otra forma debimos indicarle dos parámetros que sirven para especificar la posición del widget, en este caso nuestra etiqueta. El primer parámetro es <I>'row'</I> que se traduce como fila al español y el segundo es <I>'column'</I> o columna en español con ellos podemos indicar en que columna y fila deberá colocarse el widget, aunque por ahora no profundizaremos entrando en detalles en la forma que trabaja cada uno ni todos los parámetros que acepta cada una.
+</P>
+<P>
+Si ahora escribiéramos todo lo que vimos en nuestra consola tendríamos que ver nuestra primera etiqueta en funcionamiento, contenido dentro de una ventana quedando todo el código como el siguiente:
+</P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; etiqueta = Tkinter.Label(root, text="Codigo Python")
+&gt;&gt;&gt; etiqueta.pack()
+&gt;&gt;&gt; root.mainloop()
+</PRE>
+
+<P>
+Y así es como quedara nuestro ejemplo terminado:
+</P>
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Label/Label-01.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el próximo.
+</P>
+
+<A NAME="toc15"></A>
+<H2>4.2. Botones [Button]</H2>
+
+<P>
+Los botones pueden contener texto o imágenes y se les puede asociar funciones o métodos, que al hacer clic sobre ellos Tkinter se encargara de llamar automáticamente a ese método o función y ejecutara el código Python contenido dentro de ellos.
+</P>
+<P>
+Un detalle es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Además se puede subrayar el texto, un carácter o letra en particular, algo que es muy común cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
+</P>
+<P>
+Antes de crear a ese botón debemos declarar la función a la cual se llamara, porque como se imaginaran no podemos decirle al botón que ejecute una función que no existe, por eso vamos a escribir un par de lineas y crearemos una función simple como para verificar que dicho botón funciona correctamente.
+</P>
+
+<PRE>
+def función():
+    print "Excelente"
+</PRE>
+
+<P>
+Con esas dos lineas nos va a servir para demostrar su funcionamiento, ahora si vamos por el botón.
+</P>
+<P>
+A continuación les muestro el código con el cual vamos a trabajar:
+</P>
+
+<PRE>
+import Tkinter
+
+def funcion():
+   print "Excelente"
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Que te parece la guía?", command=funcion)
+boton.pack()
+root.mainloop()
+</PRE>
+
+<P>
+En el se observa la ya conocida importación del modulo Tkinter, la función que ya habíamos declarado y la creación del botón. Como se puede ver la creación de un botón básico es muy similar al de una etiqueta pero se incluye un parámetro mas que nos dará la posibilidad de especificar dentro de el la función que utilizaremos; el parámetro mencionado es <B>'command'</B> y en el podemos llamar a funciones o métodos, en este caso llamamos a la función 'función' que va a imprimir en la consola la palabra <I>'Excelente'</I>.
+</P>
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Button/Button-01.jpg" BORDER="0" ALT="">
+</P>
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Button/Button-02.jpg" BORDER="0" ALT="">
+</P>
+
+<A NAME="toc16"></A>
+<H2>4.3. Cuadro de texto [Entry]</H2>
+
+<P>
+Este widget nos permite tanto mostrarle información al usuario como también obtenerla de su parte, dotando a nuestra ventana de un widget muy poderoso y útil, siendo el primero de los widgets mencionados que nos posibilitara la interacción del usuario solicitando la entrada de datos. Como venimos haciendo en esta guía se mostraran algunos conceptos básicos que te permitirán empezar a utilizarlo, pero luego en la sección 'Opciones' se detallan las opciones que tienen disponibles al crear un cuadro de texto.
+</P>
+<P>
+Este elemento es muy popular y sumamente útil así que deberemos de conocerlo y manejarlo, para esto comencemos explicando algunos conceptos básicos para entender mejor de se trata esto.
+</P>
+<P>
+Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro de texto para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
+</P>
+<P>
+Por esto veremos primero un uso mas básico para luego entrar mas en detalle e incorporar estas variables a nuestro repertorio.
+</P>
+<P>
+La forma en que se declara un cuadro de texto es muy simple:
+</P>
+<P>
+campo_de_texto = Tkinter.Entry(root)
+</P>
+<P>
+Esa es su forma mas básica en donde como se observa no se llama a ninguna de las opciones que tenemos disponibles, antes de ver los métodos que podemos llamar para hacer uso de este widget veamos un ejemplo de su uso
+</P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+''
+&gt;&gt;&gt;
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-01.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Si escribiéramos un texto en el cuadro y escribimos en la consola lo siguiente
+</P>
+
+<PRE>
+campo_de_texto.get()
+</PRE>
+
+<P>
+estaríamos usando el método 'get' del widget Entry que nos permite obtener el texto que contenga el cuadro de texto, como podemos observar en el siguiente ejemplo
+</P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; # En este caso escribi "CodigoPython.com.ar"
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython.com.ar'
+&gt;&gt;&gt;
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-02.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Seguramente ese rectángulo en nuestra ventana de poco serviría si no pudiésemos interactuar con este. A continuación veremos los métodos a lo podemos llamar para trabajar con este widget.
+</P>
+<P>
+Una observación que se debe hacer, es que para escribir varias lineas de texto se debe utilizar el widget 'Text' que esta pensado para esto, que sera visto mas adelante.
+</P>
+
+<A NAME="toc17"></A>
+<H3>4.3.1. Índices</H3>
+
+<P>
+Un concepto que hay que tener en cuenta antes de empezar a utilizar algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
+</P>
+
+<DL>
+<DT>Índices numéricos</DT><DD>
+<P></P>
+Estos funcionan como los índices de las listas de Python así que su aplicación no debería ser complicada, el primer carácter comenzara a contar desde 0 en adelante. Para mas referencia repase los conceptos básicos de listas y tuplas en Python.
+</DL>
+
+<DL>
+<DT>ANCHOR</DT><DD>
+<P></P>
+Este índice corresponde al inicio del texto que se encuentre seleccionado, en caso de existir un texto seleccionado.
+Se puede usar select_from y select_adjust para alterar el comportamiento del mismo.
+</DL>
+
+<DL>
+<DT>END</DT><DD>
+<P></P>
+También podemos marcar desde un determinado carácter hasta el ultimo sin conocer la cantidad de caracteres que componen a ese campo de texto, esto es gracias a 'END' que haría de comodín para manejarnos de una forma mas sencilla. El uso de los índices (0,  END) equivaldría a seleccionar todo el texto disponible.
+</DL>
+
+<DL>
+<DT>INSERT</DT><DD>
+<P></P>
+Este índice corresponde a la posición actual de donde se encuentra el cursor. Este índice se puede trabajar junto con el método 'icursor' para alterar el lugar del cursor.
+<P></P>
+Obviamente cuando nos referimos a cursor nos referimos a la barra vertical que nos aparece cuando escribimos no al cursor del mouse (Ver mas información aquí <A HREF="http://es.wikipedia.org/wiki/Cursor_%28inform%C3%A1tica%29#Cursor_de_texto">Cursor de texto</A>).
+</DL>
+
+<DL>
+<DT>Coordenadas del Mouse</DT><DD>
+<P></P>
+Otras de la posibilidades disponibles es usar la posición del cursor del mouse para indicar el índice.
+<P></P>
+La forma en que trabaja es a través de la siguiente sintaxis
+<P></P>
+@x
+<P></P>
+Donde 'x' es un valor en píxeles con respecto al borde izquierdo del campo de texto. Por ejemplo '@0' indica el carácter mas a la izquierda del campo del texto.
+</DL>
+
+<A NAME="toc18"></A>
+<H3>4.3.2. Métodos</H3>
+
+<P>
+Como habíamos comentando cuando estábamos viendo el widget Entry, dijimos que existían métodos que nos permitían trabajar con este, los cuales iremos viendo a continuación.
+</P>
+
+<UL>
+<LI>delete(INICIO, FIN)
+<P></P>
+Elimina uno o mas elementos del campo de texto, este método recibe dos argumentos uno es el inicio desde donde se desea eliminar el contenido y el segundo argumento es hasta donde deseamos eliminar, al igual que en Python debemos comenzar el índice contando desde 0. Por ejemplo para eliminar de la siguiente cadena
+<P></P>
+'0123456789'
+<P></P>
+de los caracteres del 0 al 5, los índices que le deberíamos de dar serian (0, 6). Esto no es nada nuevo a lo ya venimos viendo en este lenguaje de programación.
+<P></P>
+También podemos pasarle un solo argumento para borrar un solo carácter, veamos estos dos a través de unos ejemplos.
+<P></P>
+Con un solo argumento:
+<P></P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython.com.ar'
+&gt;&gt;&gt; campo_de_texto.delete(0)
+&gt;&gt;&gt; campo_de_texto.get()
+'odigoPython.com.ar'
+&gt;&gt;&gt; 
+
+</PRE>
+
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-03.jpg" BORDER="0" ALT="">
+<P></P>
+Con dos argumentos:
+<P></P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython.com.ar'
+&gt;&gt;&gt; campo_de_texto.delete(12, 19)
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython'
+&gt;&gt;&gt; 
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-04.jpg" BORDER="0" ALT="">
+<P></P>
+Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con este podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar conocer cuantos caracteres componen el texto contenido en el widget
+<P></P>
+
+<PRE>
+campo_de_texto.delete(0, END)
+</PRE>
+
+<P></P>
+Aunque no es necesario comenzar desde el inicio también podemos borrar desde el quinto carácter hasta el ultimo
+<P></P>
+
+<PRE>
+campo_de_texto.delete(5, END)
+</PRE>
+
+<P></P>
+También podemos utilizar los índices ya vistos en la sección 'Índices'.
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>get()
+<P></P>
+Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
+<P></P>
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; # Ahora deben escribir el texto
+&gt;&gt;&gt; # en el campo de texto
+&gt;&gt;&gt; campo_de_texto.get()
+'No se olviden de visitar http://www.codigopython.com.ar/'
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+El valor que nos retorne siempre sera como una cadena y es muy simple comprobarlo, coloquemos un texto en nuestro campo de texto, en mi caso escribiré la cadena 'Aguante Python' y almacenemos su valor en una variable para luego analizarla con la función 'type' de Python
+<P></P>
+<PRE>
+&gt;&gt;&gt; var = campo_de_texto.get()
+&gt;&gt;&gt; var
+'Aguante Python'
+&gt;&gt;&gt; type(var)
+&lt;type 'str'&gt;
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Si lo hacemos usando solo números en el campo de texto obtendremos el mismo resultado
+<P></P>
+<PRE>
+&gt;&gt;&gt; var = campo_de_texto.get()
+&gt;&gt;&gt; var
+'0123456789'
+&gt;&gt;&gt; type(var)
+&lt;type 'str'&gt;
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Mas adelante veremos como validar nuestros campos de textos.
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>icursor(INDICE)
+<P></P>
+Nos permite mover el cursor hasta la posición indicada, cuando vimos acerca de los índices vimos a INSERT y mencionamos a 'icursor'. Este método nos permite cambiar a donde deseamos que cambie la posición del cursor y junto a INSERT podemos llevar nuestra aplicación a otro nivel de interacción con el usuario.
+<P></P>
+Un ejemplo simple seria el siguiente
+<P></P>
+<PRE>
+&gt;&gt;&gt; entrada.icursor(0)
+</PRE>
+
+<P></P>
+<PRE>
+&gt;&gt;&gt; entrada.icursor(END)
+</PRE>
+
+<P></P>
+Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposición los índices para indicar la posición del cursor.
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>index(INDICE)
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>insert(INDICE, CADENA)
+<P></P>
+Permite la inserción de texto. Supongamos que necesitamos insertar una cadena, un numero o un carácter en un campo de texto, para conseguirlo es tan simple como llamar a este método pasándole dos argumentos como parámetros. De los dos argumentos mencionados uno es el índice de donde deseamos insertar el texto y el segundo es la cadena o caracter.
+<P></P>
+En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
+<P></P>
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+&gt;&gt;&gt; campo_de_texto.insert(0, "GNU/")
+&gt;&gt;&gt; campo_de_texto.get()
+'GNU/Linux'
+&gt;&gt;&gt; 
+</PRE>
+
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>scan
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>selection
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>xview
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+Con lo que vimos ahora estamos mas cerca de dominar los cuadros de texto, aunque no hay que apresurarnos que nos queda mucho camino por delante.
+</P>
+
+<A NAME="toc19"></A>
+<H3>4.3.3. Validando un campo de texto</H3>
+
+<P>
+Para referencias acerca de textvariable vea la sección "Variables".
+</P>
+
+<A NAME="toc20"></A>
+<H2>4.4. Opciones</H2>
+
+<P>
+Muchos de los widgets que utilizamos y vimos hasta ahora cuentan con opciones, con el fin de no repetir la descripcion de cada uno de ellos seran vistos uno a uno en esta seccion.
+</P>
+<P>
+NOTA:
+</P>
+<P>
+Para mas informacion sobre los colores visite la seccion "Colores" que se ve en <A HREF="#colores">"Gestion del diseño"</A>
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+anchor
+</P>
+<P>
+Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
+</P>
+
+<TABLE ALIGN="center" BORDER="1">
+<TR>
+<TD>NW</TD>
+<TD ALIGN="center">N</TD>
+<TD ALIGN="right">NE</TD>
+</TR>
+<TR>
+<TD>W</TD>
+<TD ALIGN="center">CENTER</TD>
+<TD ALIGN="right">E</TD>
+</TR>
+<TR>
+<TD>SW</TD>
+<TD ALIGN="center">S</TD>
+<TD ALIGN="right">SE</TD>
+</TR>
+</TABLE>
+
+<UL>
+<LI>Posiciona el texto/imagen en la esquina superior izquierda del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="nw")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_nw.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la parte superior del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="n")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_n.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la esquina superior derecha del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="ne")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_ne.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la parte izquierda del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="w")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_w.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en el centro del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="center")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_center.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la parte derecha del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="e")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_e.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la esquina inferior izquierda del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="sw")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_sw.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la parte inferior del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="s")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_s.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Posiciona el texto/imagen en la esquina inferior derecha del widget
+<P></P>
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="se")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/anchor/anchor_se.jpg" BORDER="0" ALT="">
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+activebackground
+</P>
+<P>
+Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/activebackground.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+activeforeground
+</P>
+<P>
+Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/activeforeground.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+background (bg)
+</P>
+<P>
+Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su forma abreviada 'bg' como podemos ver en el segundo ejemplo.
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, background="#38EB5C")
+</PRE>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/background.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+bitmap
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+borderwidth (bd)
+</P>
+<P>
+Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", borderwidth=15)
+</PRE>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", bd=15)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/borderwidth.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+command
+</P>
+<P>
+Como ya lo mencionamos cuando vimos al widget Button este permite indicar la funcion o metodo que queremos que se llame cuando se preciona por ejemplo un boton, pero esta opcion tambien funciona con otros widgets de Tkinter cumpliendo la misma funcion.
+</P>
+
+<PRE>
+def funcion():
+    print "Excelente"
+
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Button/Button-01.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+cursor
+</P>
+<P>
+Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
+En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
+<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm</A> (Ver seccion "Anexos" para ver el listado completo).
+El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el widget.
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Que te parece la guia?", cursor="hand1")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/cursor.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+default
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+font
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+foreground (fg)
+</P>
+<P>
+Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, foreground="#38EB5C")
+</PRE>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/foreground.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+height
+</P>
+<P>
+Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", height=10)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/height.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+image
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+justify
+</P>
+
+<UL>
+<LI>RIGHT
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="right")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/justify/justify_right.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>CENTER
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="center")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/justify/justify_center.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>LEFT
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="left")
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/justify/justify_left.jpg" BORDER="0" ALT="">
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+relief
+</P>
+<P>
+Especifica la apariencia de un borde decorativo alrededor del widget que simula un efecto 3D sobre el elemento, el ancho de esta sombra depende del valor que se especifique con el atributo 'borderwidth', los posibles valores son SUNKEN, RAISED, GROOVE, RIDGE, FLAT. El valor por defecto es FLAT que no coloca ningun borde sobre el widget.
+</P>
+<P>
+Descripcion de los cuatro estilos:
+</P>
+
+<DL>
+<DT>SUNKEN:</DT><DD>
+Borde hundido, que provoca que el elemento que encierra parezca que se encuentra por debajo del nivel de la superficie de la pantalla.
+<P></P>
+<DT>RAISED:</DT><DD>
+Borde saliente, que provoca que el elemento que encierra parezca que se encuentra por encima del nivel de la superficie de la pantalla.
+<P></P>
+<DT>GROOVE:</DT><DD>
+Borde hundido, que visualmente parece que se encuentra por debajo del nivel de la superficie de la pantalla.
+<P></P>
+<DT>RIDGE:</DT><DD>
+Borde saliente, que visualmente parece que se encuentra por encima del nivel de la superficie de la pantalla.
+<P></P>
+<DT>FLAT:</DT><DD>
+No se muestra ningún borde.
+</DL>
+
+<P>
+Ejemplos:
+</P>
+
+<UL>
+<LI>SUNKEN
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="sunken", borderwidth=5)
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/relief/relief_sunken.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>RAISED
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="raised", borderwidth=5)
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/relief/relief_raised.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>GROOVE
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="groove", borderwidth=5)
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/relief/relief_groove.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>RIDGE
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="ridge", borderwidth=5)
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/relief/relief_ridge.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>FLAT
+<P></P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="flat", borderwidth=5)
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/relief/relief_flat.jpg" BORDER="0" ALT="">
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+text
+</P>
+<P>
+Este es un elemento muy importante para los widgets como Label o Button entre otros, esta opcion nos da la posibilidad de incluir un texto dentro del widget, este texto puede contener saltos de lineas en caso de ser necesario y tambien se puede utilizar una variable para indicar la cadena de texto a usar. Si se utiliza una imagen este elemento es ignorado por Tkinter.
+</P>
+<P>
+Ejemplo simple:
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Codigo Python")
+</PRE>
+
+<P>
+Ejemplo con una variable:
+</P>
+
+<PRE>
+texto = "Codigo Python"
+etiqueta = Tkinter.Label(root, text=texto)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/Label/Label-01.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Ejemplo con salto de linea (recuerden que deben usar el caracter \n para el salto de linea):
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola \n a todos")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/text-01.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulacion):
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola \t a todos")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/text-02.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+textvariable
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+underline
+</P>
+<P>
+Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ejemplo destacar un atajo con el teclado. La forma en que se utiliza es indicandole el indice de la cadena de texto que conforma nuestra etiqueta comenzando desde cero. El valor por defecto de esta opcion es -1 lo que logra que no se subraye ninguna letra
+</P>
+<P>
+Ejemplo con una etiqueta
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", underline=3)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/underline-01.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Ejemplo con un boton
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/underline-02.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+width
+</P>
+<P>
+Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
+</P>
+
+<PRE>
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", width=30)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/activeforeground.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+wraplength
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc21"></A>
+<H3>4.4.1. Disponibles para</H3>
+
+<A NAME="toc22"></A>
+<H2>4.5. Variables</H2>
+
+<P>
+Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en Entry que se los iré mostrando y los iremos viendo con ejemplos.
+</P>
+<P>
+Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que la importación de este es fundamental para poder utilizarlo, aunque para algunos resulte una obviedad nunca esta de mas remarcarlo ya que si utilizamos la forma 'from Tkinter import *' estos detalles no se observan y pueden generar confusión cuando se ven los ejemplos.
+</P>
+<P>
+Como habíamos mencionado contamos con cuatro clases de variables con Tkinter las cuales son BooleanVar, DoubleVar, IntVar y StringVar, esta ultima suele ser la mas vista y utilizada en los tutoriales disponibles en internet pero no por esto mas importante que las demás.
+</P>
+
+<A NAME="gestion"></A>
+<H1>5. Gestión del diseño</H1>
+
+<A NAME="toc24"></A>
+<H2>5.1. Métodos</H2>
+
+<P>
+Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
+</P>
+
+<A NAME="toc25"></A>
+<H3>5.1.1. iconify</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se abre una ventana hija. Lo mejor sera verlo con unos ejemplos.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+No tiene
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
+
+<UL>
+<LI>En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
+<P></P>
+<PRE>
+import Tkinter
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Minimizar", command=root.iconify)
+boton.pack()
+root.mainloop()
+</PRE>
+
+<P></P>
+<LI>En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
+<P></P>
+<PRE>
+import Tkinter
+
+def funcion():
+    otra_ventana = Tkinter.Toplevel(root)
+    root.iconify()
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Abrir otra ventana", command=funcion)
+boton.pack()
+root.mainloop()
+</PRE>
+
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc26"></A>
+<H3>5.1.2. deiconify</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con 'deiconify' podemos restaurar la ventana, como paso con 'iconify' veamoslo con unos ejemplos
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+No tiene
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
+
+<UL>
+<LI>Esta es una variacion de uno de los ejemplos que ya habiamos visto, pero en este cuando hacemos click en el boton 'Minimizar' este se minimiza pero pasado 5 segundos se vuelve a restaurar la ventana.
+<P></P>
+<PRE>
+import Tkinter
+import time
+
+def funcion():
+    root.iconify()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Minimizar", command=funcion)
+boton.pack()
+root.mainloop()
+</PRE>
+
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc27"></A>
+<H3>5.1.3. title</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+String (Cadena)
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
+
+<UL>
+<LI>Ejemplos simple:
+<PRE>
+root = Tkinter.Tk()
+root.title("Bienvenido a Codigo Python")
+root.mainloop()
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="diseno/metodos/img/title-01.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Heredando el titulo de la ventana padre:
+<P></P>
+<PRE>
+root = Tkinter.Tk()
+root.title("Bienvenido a Codigo Python")
+otra_ventana = Tkinter.Toplevel(root)
+root.mainloop()
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="diseno/metodos/img/title-02.jpg" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Ejemplo de dos ventanas con titulos distintos:
+<P></P>
+<PRE>
+root = Tkinter.Tk()
+root.title("Bienvenido a")
+otra_ventana = Tkinter.Toplevel(root)
+otra_ventana.title("Codigo Python")
+root.mainloop()
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="diseno/metodos/img/title-03.jpg" BORDER="0" ALT="">
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc28"></A>
+<H3>5.1.4. geometry</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
+<P></P>
+Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
+<P></P>
+<PRE>
+root.geometry("WxH")
+</PRE>
+
+<P></P>
+o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
+<P></P>
+<PRE>
+root.geometry("WxH±X±Y")
+</PRE>
+
+<P></P>
+El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
+<P></P>
+El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
+<P></P>
+Si no le dieramos argumentos nos devolveria la medida y la posicion de la ventana.
+<P></P>
+<DT>Argumentos:</DT><DD>
+<P></P>
+"wxh±x±y"
+<P></P>
+Donde las letras tienen este significado:
+<P></P>
+</DL>
+
+<UL>
+<LI>w: Ancho de la ventana en pixeles
+<LI>h: Alto de la ventana en pixeles
+<LI>x: Posicion en el eje X
+<LI>y: Posicion en el eje Y
+</UL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+<PRE>
+#!/usr/bin/env python
+
+import Tkinter
+
+# Primer ventana con valores positivos
+primer_ventana = Tkinter.Tk()
+primer_ventana.geometry("300x300+0+0")
+# A modo estetico le di un titulo
+primer_ventana.title("Posicion x=+0 y=+0")
+# Este tambien es estetico y no influye en el uso del metodo
+etiqueta = Tkinter.Label(primer_ventana, text="Posicion x=+0 y=+0", width=100, height=100, anchor="center")
+etiqueta.pack()
+
+# Segunda ventana con valores negativos
+segunda_ventana = Tkinter.Tk()
+segunda_ventana.geometry("300x300-0-0")
+segunda_ventana.title("Posicion x=-0 y=-0")
+etiqueta = Tkinter.Label(segunda_ventana, text="Posicion x=-0 y=-0", width=100, height=100, anchor="center")
+etiqueta.pack()
+
+primer_ventana.mainloop()
+segunda_ventana.mainloop()
+</PRE>
+
+<P></P>
+Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
+<P></P>
+<IMG ALIGN="middle" SRC="diseno/metodos/img/geometry.jpg" BORDER="0" ALT="">
+</DL>
+
+<UL>
+<LI>Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
+<P></P>
+<PRE>
+Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53)
+[GCC 4.5.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; root.geometry()
+'200x200+0+24'
+&gt;&gt;&gt; root.geometry("400x400+50+50")
+''
+&gt;&gt;&gt; root.geometry()
+'400x400+50+50'
+&gt;&gt;&gt;
+</PRE>
+
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc29"></A>
+<H3>5.1.5. maxsize</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Establece los valores maximos de la medida de la ventana, tanto su ancho como su alto. Estos valores se entregan en pixeles siendo el primer valor el ancho y el segundo el largo, aunque el orden de estos valores pueden alterarse como se observa en los ejemplos.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+(W, H)
+<P></P>
+Donde:
+<P></P>
+W = Ancho (Width)
+<P></P>
+H = Alto (Height)
+</DL>
+
+<P>
+o tambien de esta forma
+</P>
+<P>
+(width=W, height=H)
+</P>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+
+<PRE>
+root.geometry("300x300")
+root.maxsize(400, 600)
+</PRE>
+
+<P></P>
+
+<PRE>
+root.geometry("300x300")
+root.maxsize(height=600, witdh=400)
+</PRE>
+
+<P></P>
+</DL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc30"></A>
+<H3>5.1.6. minsize</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Establece los valores minimos de la medida de la ventana, tanto su ancho como su alto. Estos valores se entregan en pixeles siendo el primer valor el ancho y el segundo el largo, aunque el orden de estos valores pueden alterarse como se observa en los ejemplos.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+(W, H)
+<P></P>
+Donde:
+<P></P>
+W = Ancho (Width)
+<P></P>
+H = Alto (Height)
+<P></P>
+o tambien de esta forma
+<P></P>
+(width=W, height=H)
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+<PRE>
+root.geometry("300x300")
+root.minsize(400, 600)
+</PRE>
+
+<P></P>
+<PRE>
+root.geometry("300x300")
+root.minsize(height=600, witdh=400)
+</PRE>
+
+<P></P>
+</DL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc31"></A>
+<H3>5.1.7. state</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+newstate=ESTADO
+<P></P>
+Donde ESTADO toma estos valores:
+<PRE>
+"normal"
+"withdraw"
+"iconic"
+</PRE>
+
+<P></P>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+<PRE>
+import Tkinter
+import time
+
+def funcion():
+    root.state(newstate='withdraw')
+    time.sleep(5)
+    root.state(newstate='normal')
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Probando el metodo state", command=funcion)
+boton.pack()
+root.mainloop()
+</PRE>
+
+<P></P>
+</DL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc32"></A>
+<H3>5.1.8. resizable</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en su ancho o el su alto, dandole a sus parametros 'width'(Ancho) y 'height' (Largo) los valores 'True' o 'False'. Con True habilitamos el redimencionamiento y con False los deshabilitamos. Si estamos usando a su ves los metodos 'minsize' y/o 'maxsize' el valor maximo al cual se pueda redimencionar dependera de estos dos metodos en caso de existir.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+(W, H)
+<P></P>
+Donde:
+<P></P>
+W = Al ancho y puede tomar los valores True o False
+<P></P>
+H = Al alto y puede tomar los valores True o False
+<P></P>
+o tambien esta forma:
+<P></P>
+(width=W, height=H)
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
+
+<UL>
+<LI>Redimencionar solo el ancho:
+<P></P>
+<PRE>
+root.resizable(width=True, height=False)
+</PRE>
+
+<P></P>
+<LI>Redimencionar solo el alto:
+<P></P>
+<PRE>
+root.resizable(width=False, height=True)
+</PRE>
+
+<P></P>
+<LI>Bloquear el redimencionamiento de la ventana:
+<P></P>
+<PRE>
+root.resizable(width=False, height=False)
+</PRE>
+
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc33"></A>
+<H3>5.1.9. withdraw</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
+<P></P>
+<PRE>
+root.withdraw()
+</PRE>
+
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+No tiene
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+<PRE>
+#!/usr/bin/env python
+
+import Tkinter
+import time
+
+def funcion():
+    root.withdraw()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Probando el metodo withdraw", command=funcion)
+boton.pack()
+root.mainloop()
+</PRE>
+
+<P></P>
+</DL>
+
+<HR NOSHADE SIZE=1>
+
+<A NAME="toc34"></A>
+<H3>5.1.10. transient</H3>
+
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Este método lo permite es hacer que una ventana permanezca siempre encima de otra, si la ventana padre se minimiza la ventana que lleva el método '.transient()' también lo hará y si esta ventana padre se cerrara la ventana hija también se cerraría.
+<P></P>
+<DT>Argumentos:</DT><DD>
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+<PRE>
+#!/usr/bin/env python
+
+import Tkinter
+
+root = Tkinter.Tk()
+root.title("Ventana padre")
+# Creamos una ventana hija de root
+otra_ventana = Tkinter.Toplevel(root)
+otra_ventana.title("Ventana hija")
+# Este es solo para decoracion
+etiqueta = Tkinter.Label(otra_ventana, text='Este es un ejemplo de transient')
+etiqueta.pack()
+# Posicionamos las dos ventanas para que sea mas claro el ejemplo
+root.geometry("400x400+100+100")
+otra_ventana.geometry("200x200+150+150")
+# Y ahora si llamamos a este metodo
+otra_ventana.transient(root)
+root.mainloop()
+</PRE>
+
+<P></P>
+Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
+</DL>
+
+<A NAME="toc35"></A>
+<H2>5.2. Gestión de la geometría</H2>
+
+<P>
+Todos los widgets de Tkinter tienen acceso a métodos específicos para la gestión de la geometría, que tienen como propósito ordenarlos y organizarlos en el área donde están contenidos.
+</P>
+<P>
+Para conseguir esto tenemos tres gestores para la geometría, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
+</P>
+
+<A NAME="toc36"></A>
+<H3>5.2.1. pack</H3>
+
+<P>
+.
+</P>
+
+<A NAME="toc37"></A>
+<H3>5.2.2. grid</H3>
+
+<P>
+.
+</P>
+
+<A NAME="toc38"></A>
+<H3>5.2.3. place</H3>
+
+<P>
+.
+</P>
+
+<A NAME="toc39"></A>
+<H2>5.3. Frame</H2>
+
+<A NAME="colores"></A>
+<H2>5.4. Colores</H2>
+
+<P>
+Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoría de ellos permite especificar un color de fondo y de primer plano que nos serán muy útiles cuando intentemos darle un aspecto mas pulido a nuestra aplicación.
+</P>
+<P>
+Para especificar dichos colores tenemos dos formas, una es utilizar el nombre del color y la otra consiste en especificar la proporción de rojo, verde y azul que componen a dicho color en dígitos hexadecimales que es la forma mas popular y la mas precisa a la hora de trabajar.
+</P>
+
+<A NAME="toc41"></A>
+<H3>5.4.1. Nombres de colores</H3>
+
+<P>
+Como se había mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color blanco usaríamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores básicos sino que nos ofrece una paleta bastante amplia de colores.
+</P>
+<P>
+Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, background="red")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="colors/img/color_red.jpg" BORDER="0" ALT="">
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, background="CadetBlue")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="colors/img/color_CadetBlue.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
+</P>
+<P>
+Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>] o también en los anexos de esta guía los podrán encontrar:
+</P>
+
+<A NAME="toc42"></A>
+<H3>5.4.2. RGB hexadecimal</H3>
+
+<P>
+Aunque este método sea un poco mas complicado en su uso, es mas preciso que el método que habíamos mencionado arriba. La forma en que se utiliza es la siguiente:
+</P>
+<P>
+#RRGGBB
+</P>
+<P>
+Donde RR, GG y BB son representaciones hexadecimales de los colores rojo, verde y azul, respectivamente. Para formar un color debemos en primer lugar elegir la intensidad que deseamos usar, especificando la cantidad de rojo, verde y azul en una escala del 0 al 255.
+</P>
+<P>
+Usando la siguiente linea desde la consola de Python podemos crear nuestros colores para Tkinter reemplazando los valores de la tupla por los que deseamos utilizar:
+</P>
+
+<PRE>
+color_rojo = "#%02x%02x%02x" % (255, 0, 0)
+</PRE>
+
+<P>
+Su uso es muy simple, solo debemos usar la forma que habíamos visto cuando coloreamos usando los nombres pero ahora deberemos reemplazar el nombre del color por su equivalente en el valor RBG Hexadecimal como en el siguiente ejemplo:
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="#FA0000")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="colors/img/color_FA0000.jpg" BORDER="0" ALT="">
+</P>
+<P>
+Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
+</P>
+
+<A NAME="toc43"></A>
+<H3>5.4.3. Consejos</H3>
+
+<P>
+En esta parte final de la seccion colores nos detendremos un momento para analizar la utilizacion de colores en nuestra aplicacion y la utilizacion de paletas y esquemas de colores que nos permitan conseguir aspectos mas prolijos y agradables a la vista.
+</P>
+
+<A NAME="toc44"></A>
+<H2>5.5. Fuentes</H2>
+
+<A NAME="toc45"></A>
+<H2>5.6. Unidades de medida</H2>
+
+<P>
+En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos; para esto debemos pasar el valor como cadena que se compone de un numero entero o no (porque también podemos usar decimales en caso de ser necesario), seguido de una letra que indique el tipo de unidad a utilizar, que están especificados en la siguiente tabla:
+</P>
+
+<TABLE BORDER="1">
+<TR>
+<TH>Símbolo</TH>
+<TH COLSPAN="2">Descripción</TH>
+</TR>
+<TR>
+<TD ALIGN="center">c</TD>
+<TD>Centímetros</TD>
+</TR>
+<TR>
+<TD ALIGN="center">i</TD>
+<TD>Pulgadas</TD>
+</TR>
+<TR>
+<TD ALIGN="center">m</TD>
+<TD>Milímetros</TD>
+</TR>
+<TR>
+<TD ALIGN="center">p</TD>
+<TD>Puntos de impresora (alrededor de 0.35mm)</TD>
+</TR>
+</TABLE>
+
+<P>
+Si el valor que se pasa es un numero sin letra de unidad este es considerado como un valor en píxeles, siendo esta unidad el valor por defecto.
+</P>
+<P>
+Ejemplos:
+</P>
+
+<UL>
+<LI>Píxeles:
+<P></P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth=10)
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="dimensiones/img/dimensiones_pixeles.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>Centímetros:
+<P></P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1c')
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="dimensiones/img/dimensiones_centrimetros.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>Pulgadas:
+<P></P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1i')
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="dimensiones/img/dimensiones_pulgadas.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>Milímetros:
+<P></P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10m')
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="dimensiones/img/dimensiones_milimetros.jpg" BORDER="0" ALT="">
+<P></P>
+<LI>Puntos:
+<P></P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10p')
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="dimensiones/img/dimensiones_puntos.jpg" BORDER="0" ALT="">
+</UL>
+
+<P>
+Estas unidades de medida a excepción de los píxeles, no es recomendable usarlos ya que no están pensados específicamente para trabajar con elementos de la pantalla de nuestro ordenador y al usarlos es muy probable que no consigamos los tamaños o proporciones que esperábamos en la pantalla, por ejemplo los puntos se utiliza muy frecuentemente para la impresión ya que fueron diseñados para ese propósito y lo mismo pasa con los milímetros o las pulgadas que fueron diseñadas para otros ámbitos.
+</P>
+
+<A NAME="toc46"></A>
+<H2>5.7. Imágenes</H2>
+
+<A NAME="toc47"></A>
+<H3>5.7.1. PhotoImage</H3>
+
+<A NAME="toc48"></A>
+<H3>5.7.2. PIL</H3>
+
+<A NAME="toc49"></A>
+<H1>6. Menús y barras de herramientas</H1>
+
+<A NAME="toc50"></A>
+<H1>7. Ventanas de diálogos</H1>
+
+<A NAME="toc51"></A>
+<H1>8. Eventos</H1>
+
+<A NAME="toc52"></A>
+<H1>9. Ejemplos Avanzados</H1>
+
+<A NAME="toc53"></A>
+<H1>10. Notas finales</H1>
+
+<A NAME="toc54"></A>
+<H1>11. Enlaces de interés</H1>
+
+<P>
+<A HREF="http://www.tcl.tk/man/tcl8.5/">Tcl/Tk 8.5 Manual</A>
+</P>
+<P>
+<A HREF="http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python">Entorno grafico en Python</A>
+</P>
+<P>
+<A HREF="http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/">Interfaces gráficas de usuario en Python</A>
+</P>
+<P>
+<A HREF="http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm">Python » GUI Tk</A>
+</P>
+<P>
+<A HREF="http://www.ferg.org/thinking_in_Tkinter/all_programs.html">Thinking in Tkinter</A>
+</P>
+<P>
+<A HREF="http://www.pythonware.com/library/Tkinter/introduction/">An Introduction to Tkinter</A>
+</P>
+<P>
+<A HREF="http://infohost.nmt.edu/tcc/help/pubs/Tkinter/index.html">Tkinter 8.4 reference: a GUI for Python</A>
+</P>
+
+<A NAME="glosario"></A>
+<H1>12. Glosario</H1>
+
+<DL>
+<DT>toolkit</DT><DD>
+</DL>
+
+<DL>
+<DT>widgets</DT><DD>
+<P></P>
+Es un termino genérico para referirse a cualquiera de los elementos básicos que componen la interfaz gráfica de una aplicación. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
+</DL>
+
+<A NAME="toc56"></A>
+<H1>13. Anexos</H1>
+
+<A NAME="toc57"></A>
+<H2>13.1. Colores</H2>
+
+<P>
+Paleta de colores de Tk:
+</P>
+<P>
+Paleta de colores del sistema Mac OS X:
+</P>
+<P>
+En Mac OS X, los siguientes colores adicionales del sistema están disponibles (tenga en cuenta que los valores de color reales dependen del tema de sistema operativo actualmente activo).
+</P>
+
+<PRE>
+systemActiveAreaFill
+systemAlertActiveText
+systemAlertBackgroundActive
+systemAlertBackgroundInactive
+systemAlertInactiveText
+systemAlternatePrimaryHighlightColor
+systemAppleGuideCoachmark
+systemBevelActiveDark
+systemBevelActiveLight
+systemBevelButtonActiveText
+systemBevelButtonInactiveText
+systemBevelButtonPressedText
+systemBevelButtonStickyActiveText
+systemBevelButtonStickyInactiveText
+systemBevelInactiveDark
+systemBevelInactiveLight
+systemBlack
+systemBlackText
+systemButtonActiveDarkHighlight
+systemButtonActiveDarkShadow
+systemButtonActiveLightHighlight
+systemButtonActiveLightShadow
+systemButtonFace
+systemButtonFaceActive
+systemButtonFaceInactive
+systemButtonFacePressed
+systemButtonFrame
+systemButtonFrameActive
+systemButtonFrameInactive
+systemButtonInactiveDarkHighlight
+systemButtonInactiveDarkShadow
+systemButtonInactiveLightHighlight
+systemButtonInactiveLightShadow
+systemButtonPressedDarkHighlight
+systemButtonPressedDarkShadow
+systemButtonPressedLightHighlight
+systemButtonPressedLightShadow
+systemButtonText
+systemChasingArrows
+systemDialogActiveText
+systemDialogBackgroundActive
+systemDialogBackgroundInactive
+systemDialogInactiveText
+systemDocumentWindowBackground
+systemDocumentWindowTitleActiveText
+systemDocumentWindowTitleInactiveText
+systemDragHilite
+systemDrawerBackground
+systemFinderWindowBackground
+systemFocusHighlight
+systemHighlight
+systemHighlightAlternate
+systemHighlightSecondary
+systemHighlightText
+systemIconLabelBackground
+systemIconLabelBackgroundSelected
+systemIconLabelSelectedText
+systemIconLabelText
+systemListViewBackground
+systemListViewColumnDivider
+systemListViewEvenRowBackground
+systemListViewOddRowBackground
+systemListViewSeparator
+systemListViewSortColumnBackground
+systemListViewText
+systemListViewWindowHeaderBackground
+systemMenu
+systemMenuActive
+systemMenuActiveText
+systemMenuBackground
+systemMenuBackgroundSelected
+systemMenuDisabled
+systemMenuItemActiveText
+systemMenuItemDisabledText
+systemMenuItemSelectedText
+systemMenuText
+systemMetalBackground
+systemModelessDialogActiveText
+systemModelessDialogBackgroundActive
+systemModelessDialogBackgroundInactive
+systemModelessDialogInactiveText
+systemMovableModalBackground
+systemMovableModalWindowTitleActiveText
+systemMovableModalWindowTitleInactiveText
+systemNotificationText
+systemNotificationWindowBackground
+systemPlacardActiveText
+systemPlacardBackground
+systemPlacardInactiveText
+systemPlacardPressedText
+systemPopupArrowActive
+systemPopupArrowInactive
+systemPopupArrowPressed
+systemPopupButtonActiveText
+systemPopupButtonInactiveText
+systemPopupButtonPressedText
+systemPopupLabelActiveText
+systemPopupLabelInactiveText
+systemPopupWindowTitleActiveText
+systemPopupWindowTitleInactiveText
+systemPrimaryHighlightColor
+systemPushButtonActiveText
+systemPushButtonInactiveText
+systemPushButtonPressedText
+systemRootMenuActiveText
+systemRootMenuDisabledText
+systemRootMenuSelectedText
+systemScrollBarDelimiterActive
+systemScrollBarDelimiterInactive
+systemSecondaryGroupBoxBackground
+systemSecondaryHighlightColor
+systemSheetBackground
+systemSheetBackgroundOpaque
+systemSheetBackgroundTransparent
+systemStaticAreaFill
+systemSystemDetailText
+systemTabFrontActiveText
+systemTabFrontInactiveText
+systemTabNonFrontActiveText
+systemTabNonFrontInactiveText
+systemTabNonFrontPressedText
+systemTabPaneBackground
+systemToolbarBackground
+systemTransparent
+systemUtilityWindowBackgroundActive
+systemUtilityWindowBackgroundInactive
+systemUtilityWindowTitleActiveText
+systemUtilityWindowTitleInactiveText
+systemWhite
+systemWhiteText
+systemWindowBody
+systemWindowHeaderActiveText
+systemWindowHeaderBackground
+systemWindowHeaderInactiveText
+</PRE>
+
+<P>
+Paleta de colores del sistema Windows:
+</P>
+<P>
+En Windows, los siguientes colores adicionales del sistema están disponibles (tenga en cuenta que los valores de color reales dependen del tema de sistema operativo actualmente activo).
+</P>
+
+<PRE>
+3dDarkShadow
+3dLight
+ActiveBorder
+ActiveCaption
+AppWorkspace
+Background
+ButtonFace
+ButtonHighlight
+ButtonShadow
+ButtonText
+CaptionText
+DisabledText
+GrayText
+Highlight
+HighlightText
+InactiveBorder
+InactiveCaption
+InactiveCaptionText
+InfoBackground
+InfoText
+Menu
+MenuText
+Scrollbar
+Window
+WindowFrame
+WindowText
+</PRE>
+
+<P>
+Paleta de colores X11:
+</P>
+
+<A NAME="toc58"></A>
+<H1>14. Licencia</H1>
+
+<P>
+THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.
+</P>
+<P>
+BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED HERE, YOU ACCEPT AND AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE. TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
+</P>
+
+<OL>
+<LI><B>Definitions</B>
+<P></P>
+    <OL>
+    <LI><B>"Adaptation"</B> means a work based upon the Work, or upon the Work and other pre-existing works, such as a translation, adaptation, derivative work, arrangement of music or other alterations of a literary or artistic work, or phonogram or performance and includes cinematographic adaptations or any other form in which the Work may be recast, transformed, or adapted including in any form recognizably derived from the original, except that a work that constitutes a Collection will not be considered an Adaptation for the purpose of this License. For the avoidance of doubt, where the Work is a musical work, performance or phonogram, the synchronization of the Work in timed-relation with a moving image ("synching") will be considered an Adaptation for the purpose of this License.
+    <P></P>
+    <LI><B>"Collection"</B> means a collection of literary or artistic works, such as encyclopedias and anthologies, or performances, phonograms or broadcasts, or other works or subject matter other than works listed in Section 1(f) below, which, by reason of the selection and arrangement of their contents, constitute intellectual creations, in which the Work is included in its entirety in unmodified form along with one or more other contributions, each constituting separate and independent works in themselves, which together are assembled into a collective whole. A work that constitutes a Collection will not be considered an Adaptation (as defined below) for the purposes of this License.
+    <P></P>
+    <LI><B>"Creative Commons Compatible License"</B> means a license that is listed at <A HREF="http://creativecommons.org/compatiblelicenses">http://creativecommons.org/compatiblelicenses</A> that has been approved by Creative Commons as being essentially equivalent to this License, including, at a minimum, because that license: (i) contains terms that have the same purpose, meaning and effect as the License Elements of this License; and, (ii) explicitly permits the relicensing of adaptations of works made available under that license under this License or a Creative Commons jurisdiction license with the same License Elements as this License.
+    <P></P>
+    <LI><B>"Distribute"</B> means to make available to the public the original and copies of the Work or Adaptation, as appropriate, through sale or other transfer of ownership.
+    <P></P>
+    <B>"License Elements"</B> means the following high-level license attributes as selected by Licensor and indicated in the title of this License: Attribution, ShareAlike.
+    <P></P>
+    <LI><B>"Licensor"</B> means the individual, individuals, entity or entities that offer(s) the Work under the terms of this License.
+    <P></P>
+    <LI><B>"Original Author"</B> means, in the case of a literary or artistic work, the individual, individuals, entity or entities who created the Work or if no individual or entity can be identified, the publisher; and in addition (i) in the case of a performance the actors, singers, musicians, dancers, and other persons who act, sing, deliver, declaim, play in, interpret or otherwise perform literary or artistic works or expressions of folklore; (ii) in the case of a phonogram the producer being the person or legal entity who first fixes the sounds of a performance or other sounds; and, (iii) in the case of broadcasts, the organization that transmits the broadcast.
+    <P></P>
+    <LI><B>"Work"</B> means the literary and/or artistic work offered under the terms of this License including without limitation any production in the literary, scientific and artistic domain, whatever may be the mode or form of its expression including digital form, such as a book, pamphlet and other writing; a lecture, address, sermon or other work of the same nature; a dramatic or dramatico-musical work; a choreographic work or entertainment in dumb show; a musical composition with or without words; a cinematographic work to which are assimilated works expressed by a process analogous to cinematography; a work of drawing, painting, architecture, sculpture, engraving or lithography; a photographic work to which are assimilated works expressed by a process analogous to photography; a work of applied art; an illustration, map, plan, sketch or three-dimensional work relative to geography, topography, architecture or science; a performance; a broadcast; a phonogram; a compilation of data to the extent it is protected as a copyrightable work; or a work performed by a variety or circus performer to the extent it is not otherwise considered a literary or artistic work.
+    <P></P>
+    <LI><B>"You"</B> means an individual or entity exercising rights under this License who has not previously violated the terms of this License with respect to the Work, or who has received express permission from the Licensor to exercise rights under this License despite a previous violation.
+    <P></P>
+    <LI><B>"Publicly Perform"</B> means to perform public recitations of the Work and to communicate to the public those public recitations, by any means or process, including by wire or wireless means or public digital performances; to make available to the public Works in such a way that members of the public may access these Works from a place and at a place individually chosen by them; to perform the Work to the public by any means or process and the communication to the public of the performances of the Work, including by public digital performance; to broadcast and rebroadcast the Work by any means including signs, sounds or images.
+    <P></P>
+    <LI><B>"Reproduce"</B> means to make copies of the Work by any means including without limitation by sound or visual recordings and the right of fixation and reproducing fixations of the Work, including storage of a protected performance or phonogram in digital form or other electronic medium.
+    <P></P>
+    </OL>
+<LI><B>Fair Dealing Rights.</B> Nothing in this License is intended to reduce, limit, or restrict any uses free from copyright or rights arising from limitations or exceptions that are provided for in connection with the copyright protection under copyright law or other applicable laws.
+<P></P>
+<LI><B>License Grant.</B> Subject to the terms and conditions of this License, Licensor hereby grants You a worldwide, royalty-free, non-exclusive, perpetual (for the duration of the applicable copyright) license to exercise the rights in the Work as stated below:
+<P></P>
+    <OL>
+    <LI>to Reproduce the Work, to incorporate the Work into one or more Collections, and to Reproduce the Work as incorporated in the Collections;
+    <P></P>
+    <LI>to create and Reproduce Adaptations provided that any such Adaptation, including any translation in any medium, takes reasonable steps to clearly label, demarcate or otherwise identify that changes were made to the original Work. For example, a translation could be marked "The original work was translated from English to Spanish," or a modification could indicate "The original work has been modified.";
+    <P></P>
+    <LI>to Distribute and Publicly Perform the Work including as incorporated in Collections; and,
+    <P></P>
+    <LI>to Distribute and Publicly Perform Adaptations.
+    <P></P>
+    <LI>For the avoidance of doubt:
+    <P></P>
+        <OL>
+        <LI><B>Non-waivable Compulsory License Schemes.</B> In those jurisdictions in which the right to collect royalties through any statutory or compulsory licensing scheme cannot be waived, the Licensor reserves the exclusive right to collect such royalties for any exercise by You of the rights granted under this License;
+        <P></P>
+        <LI><B>Waivable Compulsory License Schemes.</B> In those jurisdictions in which the right to collect royalties through any statutory or compulsory licensing scheme can be waived, the Licensor waives the exclusive right to collect such royalties for any exercise by You of the rights granted under this License; and,
+        <P></P>
+        <LI><B>Voluntary License Schemes.</B> The Licensor waives the right to collect royalties, whether individually or, in the event that the Licensor is a member of a collecting society that administers voluntary licensing schemes, via that society, from any exercise by You of the rights granted under this License.
+        <P></P>
+The above rights may be exercised in all media and formats whether now known or hereafter devised. The above rights include the right to make such modifications as are technically necessary to exercise the rights in other media and formats. Subject to Section 8(f), all rights not expressly granted by Licensor are hereby reserved.
+        <P></P>
+        </OL>
+    </OL>
+<LI><B>Restrictions.</B> The license granted in Section 3 above is expressly made subject to and limited by the following restrictions:
+<P></P>
+    <OL>
+    <LI>You may Distribute or Publicly Perform the Work only under the terms of this License. You must include a copy of, or the Uniform Resource Identifier (URI) for, this License with every copy of the Work You Distribute or Publicly Perform. You may not offer or impose any terms on the Work that restrict the terms of this License or the ability of the recipient of the Work to exercise the rights granted to that recipient under the terms of the License. You may not sublicense the Work. You must keep intact all notices that refer to this License and to the disclaimer of warranties with every copy of the Work You Distribute or Publicly Perform. When You Distribute or Publicly Perform the Work, You may not impose any effective technological measures on the Work that restrict the ability of a recipient of the Work from You to exercise the rights granted to that recipient under the terms of the License. This Section 4(a) applies to the Work as incorporated in a Collection, but this does not require the Collection apart from the Work itself to be made subject to the terms of this License. If You create a Collection, upon notice from any Licensor You must, to the extent practicable, remove from the Collection any credit as required by Section 4(c), as requested. If You create an Adaptation, upon notice from any Licensor You must, to the extent practicable, remove from the Adaptation any credit as required by Section 4(c), as requested.
+    <P></P>
+    <LI>You may Distribute or Publicly Perform an Adaptation only under the terms of: (i) this License; (ii) a later version of this License with the same License Elements as this License; (iii) a Creative Commons jurisdiction license (either this or a later license version) that contains the same License Elements as this License (e.g., Attribution-ShareAlike 3.0 US)); (iv) a Creative Commons Compatible License. If you license the Adaptation under one of the licenses mentioned in (iv), you must comply with the terms of that license. If you license the Adaptation under the terms of any of the licenses mentioned in (i), (ii) or (iii) (the "Applicable License"), you must comply with the terms of the Applicable License generally and the following provisions: (I) You must include a copy of, or the URI for, the Applicable License with every copy of each Adaptation You Distribute or Publicly Perform; (II) You may not offer or impose any terms on the Adaptation that restrict the terms of the Applicable License or the ability of the recipient of the Adaptation to exercise the rights granted to that recipient under the terms of the Applicable License; (III) You must keep intact all notices that refer to the Applicable License and to the disclaimer of warranties with every copy of the Work as included in the Adaptation You Distribute or Publicly Perform; (IV) when You Distribute or Publicly Perform the Adaptation, You may not impose any effective technological measures on the Adaptation that restrict the ability of a recipient of the Adaptation from You to exercise the rights granted to that recipient under the terms of the Applicable License. This Section 4(b) applies to the Adaptation as incorporated in a Collection, but this does not require the Collection apart from the Adaptation itself to be made subject to the terms of the Applicable License.
+    <P></P>
+    <LI>If You Distribute, or Publicly Perform the Work or any Adaptations or Collections, You must, unless a request has been made pursuant to Section 4(a), keep intact all copyright notices for the Work and provide, reasonable to the medium or means You are utilizing: (i) the name of the Original Author (or pseudonym, if applicable) if supplied, and/or if the Original Author and/or Licensor designate another party or parties (e.g., a sponsor institute, publishing entity, journal) for attribution ("Attribution Parties") in Licensor's copyright notice, terms of service or by other reasonable means, the name of such party or parties; (ii) the title of the Work if supplied; (iii) to the extent reasonably practicable, the URI, if any, that Licensor specifies to be associated with the Work, unless such URI does not refer to the copyright notice or licensing information for the Work; and (iv) , consistent with Ssection 3(b), in the case of an Adaptation, a credit identifying the use of the Work in the Adaptation (e.g., "French translation of the Work by Original Author," or "Screenplay based on original Work by Original Author"). The credit required by this Section 4(c) may be implemented in any reasonable manner; provided, however, that in the case of a Adaptation or Collection, at a minimum such credit will appear, if a credit for all contributing authors of the Adaptation or Collection appears, then as part of these credits and in a manner at least as prominent as the credits for the other contributing authors. For the avoidance of doubt, You may only use the credit required by this Section for the purpose of attribution in the manner set out above and, by exercising Your rights under this License, You may not implicitly or explicitly assert or imply any connection with, sponsorship or endorsement by the Original Author, Licensor and/or Attribution Parties, as appropriate, of You or Your use of the Work, without the separate, express prior written permission of the Original Author, Licensor and/or Attribution Parties.
+    <P></P>
+    <LI>Except as otherwise agreed in writing by the Licensor or as may be otherwise permitted by applicable law, if You Reproduce, Distribute or Publicly Perform the Work either by itself or as part of any Adaptations or Collections, You must not distort, mutilate, modify or take other derogatory action in relation to the Work which would be prejudicial to the Original Author's honor or reputation. Licensor agrees that in those jurisdictions (e.g. Japan), in which any exercise of the right granted in Section 3(b) of this License (the right to make Adaptations) would be deemed to be a distortion, mutilation, modification or other derogatory action prejudicial to the Original Author's honor and reputation, the Licensor will waive or not assert, as appropriate, this Section, to the fullest extent permitted by the applicable national law, to enable You to reasonably exercise Your right under Section 3(b) of this License (right to make Adaptations) but not otherwise.
+    <P></P>
+    </OL>
+<LI><B>Representations, Warranties and Disclaimer</B>
+<P></P>
+UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING, LICENSOR OFFERS THE WORK AS-IS AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE WORK, EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTIBILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT, OR THE ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OF ABSENCE OF ERRORS, WHETHER OR NOT DISCOVERABLE. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, SO SUCH EXCLUSION MAY NOT APPLY TO YOU.
+<P></P>
+<LI><B>Limitation on Liability.</B> EXCEPT TO THE EXTENT REQUIRED BY APPLICABLE LAW, IN NO EVENT WILL LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY FOR ANY SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE OR EXEMPLARY DAMAGES ARISING OUT OF THIS LICENSE OR THE USE OF THE WORK, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+<P></P>
+<LI><B>Termination</B>
+<P></P>
+    <OL>
+    <LI>This License and the rights granted hereunder will terminate automatically upon any breach by You of the terms of this License. Individuals or entities who have received Adaptations or Collections from You under this License, however, will not have their licenses terminated provided such individuals or entities remain in full compliance with those licenses. Sections 1, 2, 5, 6, 7, and 8 will survive any termination of this License.
+    <P></P>
+    <LI>Subject to the above terms and conditions, the license granted here is perpetual (for the duration of the applicable copyright in the Work). Notwithstanding the above, Licensor reserves the right to release the Work under different license terms or to stop distributing the Work at any time; provided, however that any such election will not serve to withdraw this License (or any other license that has been, or is required to be, granted under the terms of this License), and this License will continue in full force and effect unless terminated as stated above.
+    <P></P>
+    </OL>
+<LI><B>Miscellaneous</B>
+<P></P>
+    <OL>
+    <LI>Each time You Distribute or Publicly Perform the Work or a Collection, the Licensor offers to the recipient a license to the Work on the same terms and conditions as the license granted to You under this License.
+    <P></P>
+    <LI>Each time You Distribute or Publicly Perform an Adaptation, Licensor offers to the recipient a license to the original Work on the same terms and conditions as the license granted to You under this License.
+    <P></P>
+    <LI>If any provision of this License is invalid or unenforceable under applicable law, it shall not affect the validity or enforceability of the remainder of the terms of this License, and without further action by the parties to this agreement, such provision shall be reformed to the minimum extent necessary to make such provision valid and enforceable.
+    <P></P>
+    <LI>No term or provision of this License shall be deemed waived and no breach consented to unless such waiver or consent shall be in writing and signed by the party to be charged with such waiver or consent.
+    <P></P>
+    <LI>This License constitutes the entire agreement between the parties with respect to the Work licensed here. There are no understandings, agreements or representations with respect to the Work not specified here. Licensor shall not be bound by any additional provisions that may appear in any communication from You. This License may not be modified without the mutual written agreement of the Licensor and You.
+    <P></P>
+    <LI>The rights granted under, and the subject matter referenced, in this License were drafted utilizing the terminology of the Berne Convention for the Protection of Literary and Artistic Works (as amended on September 28, 1979), the Rome Convention of 1961, the WIPO Copyright Treaty of 1996, the WIPO Performances and Phonograms Treaty of 1996 and the Universal Copyright Convention (as revised on July 24, 1971). These rights and subject matter take effect in the relevant jurisdiction in which the License terms are sought to be enforced according to the corresponding provisions of the implementation of those treaty provisions in the applicable national law. If the standard suite of rights granted under applicable copyright law includes additional rights not granted under this License, such additional rights are deemed to be included in the License; this License is not intended to restrict the license of any rights under applicable law.
+    </OL>
+</OL>
+
+</DIV>
+<!-- html code generated by txt2tags 2.6 (http://txt2tags.org) -->
+<!-- cmdline: txt2tags Interfaz grafica con Tkinter.txt -->
+</BODY></HTML>

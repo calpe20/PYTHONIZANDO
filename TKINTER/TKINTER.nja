@@ -1,0 +1,17 @@
+{
+  "mainFile": "ejercicio01.py", 
+  "name": "TKINTER", 
+  "license": "", 
+  "url": "", 
+  "supported-extensions": [
+    ".py", 
+    ".html", 
+    ".jpg", 
+    ".png", 
+    ".ui", 
+    ".css", 
+    ".json"
+  ], 
+  "project-type": "", 
+  "description": ""
+}

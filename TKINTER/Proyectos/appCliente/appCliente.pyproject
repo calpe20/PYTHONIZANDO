@@ -1,0 +1,58 @@
+
+  <Object type="System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="form1" children="Controls">
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="label3" children="Controls">
+      <Property name="TabIndex">4</Property>
+      <Property name="Size">79, 24</Property>
+      <Property name="Text">label3</Property>
+      <Property name="Location">13, 104</Property>
+      <Property name="DataBindings">
+        <Property name="DefaultDataSourceUpdateMode">OnValidation</Property>
+      </Property>
+      <Property name="Name">label3</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="label2" children="Controls">
+      <Property name="TabIndex">3</Property>
+      <Property name="Size">305, 31</Property>
+      <Property name="Text">label2</Property>
+      <Property name="Location">15, 51</Property>
+      <Property name="DataBindings">
+        <Property name="DefaultDataSourceUpdateMode">OnValidation</Property>
+      </Property>
+      <Property name="Name">label2</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="label1" children="Controls">
+      <Property name="TabIndex">2</Property>
+      <Property name="Size">51, 17</Property>
+      <Property name="Text">label1</Property>
+      <Property name="Location">11, 15</Property>
+      <Property name="DataBindings">
+        <Property name="DefaultDataSourceUpdateMode">OnValidation</Property>
+      </Property>
+      <Property name="Name">label1</Property>
+    </Object>
+    <Object type="System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="textBox1" children="Controls">
+      <Property name="Size">164, 20</Property>
+      <Property name="DataBindings">
+        <Property name="DefaultDataSourceUpdateMode">OnValidation</Property>
+      </Property>
+      <Property name="Name">textBox1</Property>
+      <Property name="Location">68, 12</Property>
+      <Property name="TabIndex">1</Property>
+    </Object>
+    <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="button1" children="Controls">
+      <Property name="TabIndex">0</Property>
+      <Property name="Name">button1</Property>
+      <Property name="Size">83, 21</Property>
+      <Property name="UseVisualStyleBackColor">True</Property>
+      <Property name="Text">button1</Property>
+      <Property name="Location">238, 11</Property>
+      <Property name="DataBindings">
+        <Property name="DefaultDataSourceUpdateMode">OnValidation</Property>
+      </Property>
+    </Object>
+    <Property name="Name">form1</Property>
+    <Property name="DataBindings">
+      <Property name="DefaultDataSourceUpdateMode">OnValidation</Property>
+    </Property>
+    <Property name="ClientSize">546, 273</Property>
+  </Object>

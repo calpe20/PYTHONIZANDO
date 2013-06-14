@@ -1,0 +1,256 @@
+﻿Interfaz gráfica con Tkinter
+Codigo Python [contacto@codigopython.com.ar]
+Ultima modificación %%date(%d-%m-%Y)
+%!target: html
+%!style(html): css/base.css
+%!encoding: UTF-8
+%!options: --toc --css-sugar --headers --enum-title
+
+Licencia:
+
+[[img/cc-by-sa.png] http://creativecommons.org/licenses/by-sa/3.0/deed.es]
+
+Este trabajo esta licenciado bajo la licencia de Creative Commons Atribución-CompartirIgual 3.0 Unported. Para ver una copia de esta licencia, visita [http://creativecommons.org/licenses/by-sa/3.0/deed.es http://creativecommons.org/licenses/by-sa/3.0/deed.es] o envía una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+
+
+Puede descargar la versión más reciente de esta guía gratuitamente en la web
+[https://github.com/eliluminado/Guia-Tkinter https://github.com/eliluminado/Guia-Tkinter]
+
+
+ [img/Logo_Free_Cultural_Works.png]
+
+Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGTK, PyQT, WxPython o Tkinter entre las mas conocidas teniendo cada una sus ventajas y desventajas, así como cada una tiene facilidades y complicaciones en su uso y aplicación. En esta oportunidad les daremos un espacio a Tkinter e intentaremos ser lo mas lo mas claro posible sin pasarnos por alto los pequeños detalles en lo que compone la creación de una interfaz gráfica en Python con el toolkit Tkinter.
+
+= Índice =
+
+%%toc
+
+
+= Introducción =
+
+Sean bienvenidos a esta noble guía que pretende a lo largo de sus capítulos mostrar las herramientas y conocimientos necesarios para el desarrollo de interfaces gráficas con las librerías Tk y el lenguaje de programación Python. El contenido de esta guía no pretende ser una referencia completa de lo que puede lograr pero si servir como una base al poco contenido que se logra encontrar en español sobre Tkinter. 
+
+== Acerca de Tk ==
+Tkinter es un [binding http://es.wikipedia.org/wiki/Binding] de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programación entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptación de esta librería para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondrá un inconveniente.
+
+Se considera un estándar para la interfaz gráfica de usuario (GUI) para Python y es el que viene por defecto con la instalación para Microsoft Windows y preinstalado en la mayoría de las distribuciones de GNU/Linux. Con Tkinter podremos conseguir resultados casi tan buenos como con otras librerías gráficas siempre teniendo en cuenta que quizás con otras herramientas podamos realizar trabajos mas complejos donde necesitemos una plataforma mas robusta, pero como herramienta didáctica e interfaces sencillas nos sobrara, dándonos una perspectiva de lo que se trata el desarrollo de una parte muy importante de una aplicación si deseamos distribuirla. Gracias a Tkinter veremos como interactuar con el usuario pidiéndole el ingreso de datos, capturando la pulsación de teclas, movimientos del mouse, entre algunas de las cosas que podremos lograr.
+
+=== Historia ===
+% Por implementar
+% Referencia: http://www.python-course.eu/python_Tkinter.php
+
+=== Virtudes y limitaciones ===
+% Por implementar
+
+== Que es una interfaz grafica ==
+% Por implementar
+% Referencias: http://es.wikipedia.org/wiki/Interfaz_gr%C3%A1fica_de_usuario
+
+== Instalando Tkinter ==
+% Por implementar
+% Referencia: http://www.tkdocs.com/tutorial/install.html
+
+=== Linux ===
+=== Windows ===
+=== Mac ===
+
+== Sobre esta guía ==
+
+Para los que deseen colaborar con esta guía así como en su contenido, pueden hacerlo registrándose en el [Foro http://foro.codigopython.com.ar/] o desde su repositorio en GitHub [https://github.com/eliluminado/Guia-Tkinter https://github.com/eliluminado/Guia-Tkinter]
+
+
+= Empezando por lo básico =
+
+Lo primero que debemos hacer al igual que con otros módulos, es que debemos importarlo para poder comenzar a utilizarlo, y al igual que con otros módulos no hay una sola forma de hacerlo.
+
+La primer forma (y la mas popular):
+
+``` from Tkinter import *
+
+Y la segunda:
+
+``` import Tkinter
+
+: **NOTA**
+En las versiones 3.x de Python el modulo Tk se debe llamar de esta forma //"from Tkinter import *"// y no de esta otra forma //"from Tkinter import *"//, es un cambio menor que hay que tener en cuenta si están trabajando con Python 3.
+
+
+La diferencia entre usar la primera o la segunda forma es la misma con la que nos podemos encontrar a la hora de importar un modulo en Python, para verlo les muestro esta diferencia utilizando al modulo //'time'// y usamos el siguiente ejemplo:
+
+
+
+```
+import time
+time.sleep(10)
+```
+
+```
+from time import sleep
+sleep(10)
+```
+
+Usando la forma //"import Tkinter"// cada vez que utilicemos una función de este modulo tendremos que anteponer la palabra //'Tkinter'//, en cambio usando la segunda forma //"from Tkinter import *"// simplemente deberemos usar el nombre de la función sin el nombre del modulo. Hay otras formas pero dependerá de tu forma de trabajar o la que te resulte mas cómoda, en todo caso puedes darle un vistazo a esta traducción de la guía de estilo escrita por Guido van Rossum y Barry Warsaw [http://mundogeek.net/traducciones/guia-estilo-python.htm http://mundogeek.net/traducciones/guia-estilo-python.htm]
+
+Por ahora a modo didactico usaremos la segunda forma para que los ejemplos sean mas claros, pero esto queda a tu eleccion. Ahora si retomemos nuestro camino.
+
+Una observación que tendremos que tener antes de continuar es no debemos pasa por alto la posibilidad de que el usuario no tenga instalado las librerías de Tkinter y en consecuencia nuestra aplicación no podrá funcionar, lo mejor en este caso como en muchos otros es anticiparnos a los posibles errores que puedan ir surgiendo y manejar las excepciones de la siguiente forma:
+
+```
+try:
+    import Tkinter
+except ImportError:
+    raise ImportError,"Se requiere el modulo Tkinter"
+```
+
+De esta forma en caso de que el potencial usuario de nuestra preciada aplicación no puede ejecutarla pueda saber cual es motivo (en este caso es que no tenga instalado Tkinter) por el cual no pudo iniciarla.
+
+
+Una vez importado el modulo Tkinter correctamente podemos utilizarlo para crear nuestra primera ventana de la siguiente forma:
+
+```
+import Tkinter
+
+root = Tkinter.Tk()
+root.mainloop()
+```
+
+Estas lineas son fundamentales, ya que de ellas dependerá gran parte del contenido así como pueden ser botones y menús, aunque mas adelante conforme vayamos viendo temas mas avanzados podremos hacer uso de otras herramientas y técnicas. 
+En la primera linea (No tengamos en cuenta la importación) se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador que en este caso lo llamamos 'root' debemos cerrarlo para capturar como veremos mas adelante los eventos.
+
+: **NOTA**
+La variable 'root' usada para nombrar al identificador puede ser reemplazada por cualquier otro nombre siempre y cuando se respeten las palabras reservadas de Python, aunque es muy utilizado usar el nombre 'root' para la ventana principal y puede ser una buena practica para que resulte mas familiar a los demás programadores que se quieran unir al desarrollo de nuestra aplicación.
+
+
+Con esto ya tendremos una ventana vacía que nos servirá para comenzar a trabajar, a partir de ahora iremos ampliando el contenido mostrando los distintos widgets con los que contamos en Tkinter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de este material.
+
+
+= Widgets =
+
+En esta sección no nos centraremos en el posicionamiento y diseño de los elementos que compondrán nuestra interfaz gráfica, lo dejaremos para la siguiente sección ["Gestión del diseño" #gestion] en donde se vera mas detenidamente este asunto.
+
+
+== Etiquetas [Label] ==
+
+%!include: widgets/label.t2t
+
+
+== Botones [Button] ==
+
+%!include: widgets/button.t2t
+
+
+== Cuadro de texto [Entry] ==
+
+%!include: widgets/entry.t2t
+
+
+== Opciones ==
+
+%!include: widgets/Options.t2t
+
+
+== Variables ==
+
+%!include: widgets/textvariable.t2t
+
+
+= Gestión del diseño =[gestion]
+
+== Métodos ==
+
+%!include: diseno/metodos.t2t
+
+
+== Gestión de la geometría ==
+
+Todos los widgets de Tkinter tienen acceso a métodos específicos para la gestión de la geometría, que tienen como propósito ordenarlos y organizarlos en el área donde están contenidos.
+
+Para conseguir esto tenemos tres gestores para la geometría, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
+
+
+=== pack ===
+
+%!include: geometria/pack/pack.t2t
+
+=== grid ===
+
+%!include: geometria/grid/grid.t2t
+
+=== place ===
+
+%!include: geometria/place/place.t2t
+
+
+== Frame ==
+
+%Por implementar
+%Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
+
+
+
+== Colores ==[colores]
+
+%!include: colors/colores.t2t
+
+
+== Fuentes ==
+
+== Unidades de medida ==
+
+%!include: dimensiones/dimensiones.t2t
+
+
+== Imágenes ==
+=== PhotoImage ===
+=== PIL ===
+
+= Menús y barras de herramientas =
+
+
+= Ventanas de diálogos =
+
+
+= Eventos =
+
+
+= Ejemplos Avanzados =
+
+
+= Notas finales =
+
+
+= Enlaces de interés =
+
+[Tcl/Tk 8.5 Manual http://www.tcl.tk/man/tcl8.5/]
+
+[Entorno grafico en Python http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python]
+
+[Interfaces gráficas de usuario en Python http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/]
+
+[Python » GUI Tk http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm]
+
+[Thinking in Tkinter http://www.ferg.org/thinking_in_Tkinter/all_programs.html]
+
+[An Introduction to Tkinter http://www.pythonware.com/library/Tkinter/introduction/]
+
+[Tkinter 8.4 reference: a GUI for Python http://infohost.nmt.edu/tcc/help/pubs/Tkinter/index.html]
+
+
+= Glosario =[glosario]
+
+: toolkit
+
+
+: widgets
+
+Es un termino genérico para referirse a cualquiera de los elementos básicos que componen la interfaz gráfica de una aplicación. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
+
+
+= Anexos =
+
+%!include: anexos.t2t
+
+
+= Licencia =
+
+%!include: LICENSE.t2t

@@ -1,0 +1,1 @@
+from properties_widget import PropertiesWidget
